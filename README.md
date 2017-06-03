@@ -15,3 +15,7 @@ This program writes data from a YouLess Energy Monitor in a MySql (MariaDB) data
 * Create the tables in DB by starting tables.php.
 
 * Create a cron job for starting php reading php in an interval of your choice.
+
+# Example
+
+At https://fehngarten.de/wetter you see, amongst other things, a sun indicator. This is realized by a YouLess Energy Monitor which is measuring the power of a photovoltaics unit. 
