@@ -4,14 +4,14 @@ This program writes data from a YouLess Energy Monitor in a MySql (MariaDB) data
 
 # Installation
 
-*Copy the three php files to a directory of your choice. 
+* Copy the three php files to a directory of your choice. 
 
-*Create a database and a database user called youless in your MySql or MariaDB database.
+* Create a database and a database user called youless in your MySql or MariaDB database.
 
-*Edit config.php and follow the comments inside. (set IP of your YouLess unit, set DB credits, name your device)
+* Edit config.php and follow the comments inside. (set IP of your YouLess unit, set DB credits, name your device)
 
-*It is possible to maintain multible devices. See config.php
+* It is possible to maintain multible devices. See config.php
 
-*Create the tables in DB by starting tables.php.
+* Create the tables in DB by starting tables.php.
 
-*Create a cron job for starting php reading php in an interval of your choice.
+* Create a cron job for starting php reading php in an interval of your choice.
