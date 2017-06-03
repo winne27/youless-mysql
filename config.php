@@ -1,13 +1,13 @@
 <?php
 
 // your serial number of device for this config - allows multiple devices in one database
-$dnr[0] = 3;
+$dnr[0] = 0;
 // name of device
-$name[0] = 'MyYouLessAdapter';
+$name[0] = 'MyYouLessMonitor';
 // URL of YouLess device
 $url[0] = 'http://192.168.0.14';
 
-// copy this lines above and change index from 0 to i (1,2,3, ...)  for further devices
+// for further devices copy this lines above and change index from 0 to i (1,2,3, ...)  and change $dnr[i] (normally to i)
 
 // connect data to MySql database
 $host = 'localhost';
@@ -17,5 +17,4 @@ $dbuser = 'youless';
 $password = 'yourpassword';
 
 // tablenames in database
-//$tablename_prefix = 'em1010';
 $tablename_prefix = 'youless';
