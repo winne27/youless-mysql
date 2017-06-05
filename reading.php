@@ -67,18 +67,23 @@
             $sth->bindValue(':dnr', $dnr[$index], PDO::PARAM_INT);
             $sth->execute();
 
-            $sql = 'insert into ' . $daily_tablename . '
-                        select curdate(), :dnr, tt - ty, tt from
-    			            ((select count(total_energy) dummy,
-                                     ifnull(total_energy,
-                                            (select total_energy tt from ' . $values_tablename . ' where dnr =  :dnr order by datetime asc limit 1)
-                                           ) ty
-                                from ' . $values_tablename . ' where dnr =  :dnr and date(datetime) < curdate() order by datetime desc limit 1) a,
-                            (select total_energy tt from ' . $values_tablename . ' where dnr =  :dnr order by datetime desc limit 1) b)
-            ';
+            $today = date('Ymd') . '000000';
+            $yesterday = date('Ymd', time() - 86400);
 
+            $sql = 'insert into ' . $daily_tablename . '
+                         select curdate(), :dnr, :total_energy - tey, :total_energy
+                           from (select count(dnr) dummy,
+                                        ifnull(total_energy,
+                                               (select total_energy
+                                                  from ' . $values_tablename . '
+                                                 where dnr = :dnr and datetime >= :today order by datetime asc limit 1)) tey
+                                   from ' . $daily_tablename . ' where dnr = :dnr and date = :yesterday) a
+            ';
             $sth = $dbh->prepare($sql);
             $sth->bindValue(':dnr', $dnr[$index], PDO::PARAM_INT);
+            $sth->bindValue(':yesterday', $yesterday, PDO::PARAM_STR);
+            $sth->bindValue(':today', $today, PDO::PARAM_STR);
+            $sth->bindValue(':total_energy', $total_energy, PDO::PARAM_STR);
             $sth->execute();
             $dbh->commit();
         } catch(Exception $e) {
